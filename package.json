@@ -1,0 +1,29 @@
+{
+  "name": "ambient-alfred",
+  "version": "1.6.0",
+  "description": "OpenClaw plugin for Omi ambient transcript processing — always-on AI listening and command detection",
+  "main": "index.ts",
+  "openclaw": {
+    "extensions": ["./index.ts"]
+  },
+  "files": [
+    "index.ts",
+    "openclaw.plugin.json",
+    "receiver/",
+    "pipeline/",
+    "skills/",
+    "agents/",
+    "install.sh",
+    "requirements.txt",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["openclaw", "openclaw-plugin", "omi", "ambient", "transcript", "voice", "ai-agent", "wearable"],
+  "author": "ssdavidai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ssdavidai/ambient-alfred.git"
+  },
+  "homepage": "https://github.com/ssdavidai/ambient-alfred"
+}

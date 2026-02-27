@@ -1,0 +1,96 @@
+{
+  "id": "ambient-alfred",
+  "name": "Ambient Alfred",
+  "description": "Always-on ambient transcript pipeline for Omi wearable devices — audio capture, transcription, conversation grouping, command detection, and vault integration",
+  "version": "1.0.0",
+  "skills": ["./skills/omi-transcripts"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "receiver": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "host": { "type": "string", "default": "0.0.0.0" },
+          "port": { "type": "number", "default": 8080 }
+        }
+      },
+      "transcription": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": ["assemblyai", "whisper_compatible", "openai", "passthrough"],
+            "default": "assemblyai"
+          },
+          "apiKey": { "type": "string" },
+          "apiKeyEnv": { "type": "string" },
+          "url": { "type": "string" },
+          "model": { "type": "string" },
+          "language": { "type": "string" }
+        }
+      },
+      "chunker": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "silenceThresholdSeconds": { "type": "number", "default": 10 },
+          "maxSegmentDurationSeconds": { "type": "number", "default": 300 },
+          "minSegmentSpeechSeconds": { "type": "number", "default": 0.5 }
+        }
+      },
+      "conversations": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "gapSeconds": { "type": "number", "default": 600 },
+          "minWords": { "type": "number", "default": 30 },
+          "debounceSeconds": { "type": "number", "default": 120 }
+        }
+      },
+      "commandDetection": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": true },
+          "agentName": { "type": "string", "default": "Alfred" },
+          "openrouterApiKey": { "type": "string" },
+          "openrouterModel": { "type": "string", "default": "google/gemini-2.0-flash-001" },
+          "subagentId": { "type": "string" }
+        }
+      },
+      "storage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transcriptsDir": { "type": "string" },
+          "vaultInboxDir": { "type": "string" },
+          "queueDir": { "type": "string" }
+        }
+      },
+      "notifications": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "channel": { "type": "string" },
+          "channelType": { "type": "string", "enum": ["slack", "telegram", "discord"] }
+        }
+      }
+    }
+  },
+  "uiHints": {
+    "receiver.port": { "label": "Receiver Port", "placeholder": "8080" },
+    "transcription.provider": { "label": "Transcription Provider" },
+    "transcription.apiKeyEnv": { "label": "API Key Env Var", "placeholder": "ASSEMBLYAI_API_KEY", "sensitive": true },
+    "transcription.url": { "label": "Whisper URL", "placeholder": "http://localhost:8090/v1/audio/transcriptions" },
+    "commandDetection.agentName": { "label": "Agent Name", "placeholder": "Alfred" },
+    "commandDetection.openrouterApiKey": { "label": "OpenRouter API Key", "sensitive": true },
+    "commandDetection.openrouterModel": { "label": "Classification Model", "placeholder": "google/gemini-2.0-flash-001" },
+    "commandDetection.subagentId": { "label": "SubAgent ID", "placeholder": "subalfred" },
+    "storage.transcriptsDir": { "label": "Transcripts Directory", "placeholder": "./transcripts" },
+    "storage.vaultInboxDir": { "label": "Vault Inbox Directory", "placeholder": "~/vault/inbox" },
+    "notifications.channel": { "label": "Notification Channel", "placeholder": "C0XXXXXXXX" }
+  }
+}

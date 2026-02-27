@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+queue/
+transcripts/
+logs/
+node_modules/
+*.egg-info/
+dist/
+.ambient-alfred-state.json
+.ambient-alfred-state.json.tmp
+reference/

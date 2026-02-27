@@ -1,0 +1,10 @@
+# Receiver dependencies
+fastapi>=0.104.0
+uvicorn>=0.24.0
+httpx>=0.25.0
+numpy>=1.24.0
+torch>=2.0.0
+pydantic>=2.0.0
+
+# Pipeline dependencies
+watchdog>=3.0.0
